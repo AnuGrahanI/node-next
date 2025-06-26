@@ -5,7 +5,7 @@ import axios, {
   AxiosResponse,
 } from "axios";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3000"; 
+const API_BASE_URL = process.env.NEXTAUTH_URL || "http://localhost:3000"; 
 
 // ✅ Create Axios Instance
 const api: AxiosInstance = axios.create({
