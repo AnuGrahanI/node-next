@@ -32,13 +32,13 @@ const providersConfig:any = {
 interface SignInButtonWithProviderProps {
   provider: "google" | "github" | "gitlab" | "email" | "microsoft";
   disabled?: boolean;
-  params?: { email: string };
+  // params?: { email: string };
 }
 
 export const SignInButtonWithProvider = ({
   provider,
   disabled = false,
-  params,
+  // params,
 }: SignInButtonWithProviderProps) => {
   const [loading, setLoading] = useState(false);
 
@@ -48,7 +48,7 @@ export const SignInButtonWithProvider = ({
   const callbackUrl = `${window.location.origin}/auth-callback`; 
     const authUrl = `/api/auth/signin/${provider}?callbackUrl=${encodeURIComponent(callbackUrl)}`;
 
-    const popup = window.open(authUrl, "_blank");
+     window.open(authUrl, "_blank");
 
     const messageListener = (event: MessageEvent) => {
       if (event.origin !== window.location.origin) return;

@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       if (!email) {
         return NextResponse.json({ error: "Invalid ID token" }, { status: 400 });
       }
-       let user = await User.findOne({ email });
+       const user = await User.findOne({ email });
 
         if (!user) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
@@ -48,7 +48,8 @@ export async function POST(req: NextRequest) {
         expiresAt: new Date(Date.now() + 10 * 60 * 60 * 1000).toISOString(),
       });
     } catch (verifyError) {
-      // Token isn't signed with your secret; treat it as an ID token from an external provider
+      console.log("Error verifying token:", verifyError);
+      
       const decoded = jwt.decode(token) as JwtPayload;
 
       const email = decoded?.email;
@@ -58,7 +59,7 @@ export async function POST(req: NextRequest) {
       }
 
       // Find or create user
-      let user = await User.findOne({ email });
+      const user = await User.findOne({ email });
 
         if (!user) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });

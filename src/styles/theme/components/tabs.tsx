@@ -38,7 +38,7 @@
         // backgroundColor: "transparent",
         height: '3px',
           "& span":{
-            // backgroundColor:theme.palette.primary.main,
+            backgroundColor:theme.palette.primary.main,
             height: '3px !important',
             width:'30% !important',
             display:'inline-block',

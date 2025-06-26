@@ -1,5 +1,5 @@
+import { otpMap } from "@/lib/otp-store/otp";
 import { NextResponse } from "next/server";
-import { otpMap } from "../send-otp/route";
 
 export async function POST(req: Request) {
   const { email, otp } = await req.json();

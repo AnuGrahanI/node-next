@@ -23,7 +23,6 @@ import { MuiTableBody } from './table-body';
 import { MuiTableCell } from './table-cell';
 import { MuiTableHead } from './table-head';
 import { MuiBreadcrumbs } from './bread-crumb';
-import {MuiDataGrid} from "./data-grid";
 import {MuiTooltip} from "./tool-tip";
 import {MuiDrawer} from "./drawer";
 // import {MuiSlider} from "./slide";
@@ -55,7 +54,7 @@ export const components = {
   MuiAlert,
   MuiTooltip,
   MuiBreadcrumbs,
-  MuiDataGrid,
+
   MuiDrawer,
   // MuiSlider
   MuiDialog

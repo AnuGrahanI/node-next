@@ -10,6 +10,7 @@ export const verifyToken = (token: string): DecodedToken | null => {
   try {
     return jwt.verify(token, process.env.NEXTAUTH_SECRET!) as DecodedToken;
   } catch (error) {
+    console.error('Error verifying token:', error);
     return null;
   }
 };

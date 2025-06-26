@@ -5,7 +5,7 @@ const MONGODB_URI = process.env.MONGODB_URL || '';
 
 if (!MONGODB_URI) throw new Error('MongoDB URI is missing');
 
-let cached = (global as any).mongoose || { conn: null, promise: null };
+const cached = (global as any).mongoose || { conn: null, promise: null };
 
 export async function connectDB() {
   if (cached.conn) return cached.conn;

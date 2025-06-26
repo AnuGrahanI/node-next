@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import User from "@/models/User";
 import nodemailer from "nodemailer";
+import { otpMap } from "@/lib/otp-store/otp";
 
-export const otpMap = new Map(); // In-memory storage for OTP
 
 // Configure email transporter (use env vars in production)
 const transporter = nodemailer.createTransport({

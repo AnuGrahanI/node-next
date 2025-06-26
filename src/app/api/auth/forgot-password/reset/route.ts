@@ -1,7 +1,7 @@
 import { connectDB } from "@/lib/mongodb";
+import { otpMap } from "@/lib/otp-store/otp";
 import User from "@/models/User";
 import bcrypt from "bcryptjs";
-import { otpMap } from "../send-otp/route";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
