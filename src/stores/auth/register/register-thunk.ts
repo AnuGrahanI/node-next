@@ -1,5 +1,6 @@
 import { createAsyncThunk,  } from '@reduxjs/toolkit';
-import api from '@/lib/apiClient';
+import apiClient from '@/lib/apiClient';
+
 
 interface RegisterPayload {
   name: string;
@@ -13,7 +14,7 @@ export const registerUser = createAsyncThunk(
   'auth/register',
   async (payload: RegisterPayload, { rejectWithValue }) => {
     try {
-      const response = await api.post('/api/auth/register', payload);
+      const response = await apiClient.post('/api/auth/register', payload);
       return response.message;
     } catch (err: any) {
       return rejectWithValue(err.message || 'Something went wrong');

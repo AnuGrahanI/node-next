@@ -48,8 +48,9 @@ class AuthClient {
     }
   }
 
-  async getToken(): Promise<{ error?: string; token?: string | null; isLoading: boolean }> {
+  async getToken(): Promise<{ error?: string; token?: string | null; isLoading: boolean, user?: any | null }> {
     let token = sessionStorage.getItem("accessToken");
+    let user = sessionStorage.getItem("user");
     let isLoading = true;
 
     try {
@@ -63,12 +64,13 @@ class AuthClient {
       }
 
       isLoading = false;
-      return { token, isLoading };
+      return { token, isLoading ,user};
     } catch (err: any) {
       return {
         error: "Failed to fetch session: " + (err?.message || "Unknown error"),
         token: null,
         isLoading: false,
+        user: null
       };
     }
   }

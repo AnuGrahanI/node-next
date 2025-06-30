@@ -48,28 +48,40 @@ export default function LoginPage() {
 
   return (
     <>
+      <Box sx={{ textAlign:'center',mb:1}}>
+              <Typography variant="h4"  color="primary">
+                PEA`ZA
+              </Typography>
+            </Box>
       <Typography variant="h5" fontWeight={600} gutterBottom>
         Login
       </Typography>
 
       <form onSubmit={handleSubmit}>
-        <Box display="flex" flexDirection="column" gap={2}>
+        <Box display="flex" flexDirection="column" gap={1}>
+          <Box>
+          <Typography variant="subtitle2" >Email</Typography>
           <TextField
             name="email"
-            label="Email"
             type="email"
             value={form.email}
             onChange={handleChange}
             required
+            fullWidth
           />
+          </Box>
+          <Box> 
+            <Typography variant="subtitle2" >Password</Typography>
           <TextField
             name="password"
-            label="Password"
             type="password"
             value={form.password}
             onChange={handleChange}
             required
+            fullWidth
           />
+          </Box>
+
           
           {/* Forgot Password Link - Only shows when conditions are met */}
           <Collapse in={showForgotPassword}>
@@ -94,20 +106,23 @@ export default function LoginPage() {
           
           <Divider/>
           
-          <SignInButtonWithProvider provider="microsoft" />
+          {/* <SignInButtonWithProvider provider="microsoft" /> */}
           <SignInButtonWithProvider provider="google" />
           <SignInButtonWithProvider provider="github" />
 
           <Divider>or </Divider>
-          <Stack direction="row" justifyContent="space-between">
-            <Button 
-              fullWidth
-              color="secondary"
-              variant="outlined" 
-              onClick={() => router.push("/auth/register")}
-            >
-              Create Account
-            </Button>
+          <Stack direction="row" justifyContent="center" mt={2}>
+            <Typography variant="body2">
+              Don’t have an account?{" "}
+              <Button 
+                variant="text" 
+                size="small" 
+                onClick={() => router.push("/auth/register")}
+                sx={{ textTransform: 'none', minWidth: 'auto' }}
+              >
+                Create one
+              </Button>
+            </Typography>
           </Stack>
         </Box>
       </form>

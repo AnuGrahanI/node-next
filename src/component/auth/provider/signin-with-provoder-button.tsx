@@ -68,6 +68,7 @@ export const SignInButtonWithProvider = ({
       variant="outlined"
       color="secondary"
       disabled={loading || disabled}
+      sx={{ mt: 2 }}
       onClick={onSubmit}
       startIcon={
         loading ? (

@@ -7,8 +7,11 @@ import { Box, List, ListItemButton, ListItemText, Toolbar } from '@mui/material'
 const drawerWidth = 240;
 
 const navItems = [
-  { text: 'Dashboard', href: '/dashboard' },
-  { text: 'CRUD', href: '/crud' },
+  { text: 'Home', href: '/home' },
+  { text: 'people', href: '/peoples' },
+  { text: 'chat', href: '/chat' },
+  { text: 'profile', href: '/profile' },
+
 ];
 
 export default function Sidebar({ onItemClick }: { onItemClick?: () => void }) {

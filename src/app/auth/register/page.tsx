@@ -7,6 +7,8 @@ import {
   Box,
   Button,
   CircularProgress,
+  Divider,
+  Stack,
   TextField,
   Typography,
 } from '@mui/material';
@@ -39,49 +41,73 @@ export default function RegisterForm() {
   }, [dispatch]);
 
   return (
-    <Box mx="auto" mt={5}>
+    <Box mx="auto" >
+      <Box sx={{ textAlign:'center',mb:1}}>
+        <Typography variant="h4"  color="primary">
+          PEA`ZA
+        </Typography>
+      </Box>
       <Typography variant="h5" mb={2}>
         Register
       </Typography>
       <form onSubmit={handleSubmit}>
-        <TextField
-          label="Name"
-          name="name"
-          fullWidth
-          margin="normal"
-          value={form.name}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Email"
-          name="email"
-          fullWidth
-          margin="normal"
-          value={form.email}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Password"
-          name="password"
-          type="password"
-          fullWidth
-          margin="normal"
-          value={form.password}
-          onChange={handleChange}
-        />
+        <Box>
+          <Typography variant="subtitle2" >Name</Typography>
+          <TextField
+            name="name"
+            fullWidth
+            margin="normal"
+            value={form.name}
+            onChange={handleChange}
+          />
+        </Box>
+        <Box>
+          <Typography variant="subtitle2" >Email</Typography>
+          <TextField
+            name="email"
+            fullWidth
+            margin="normal"
+            value={form.email}
+            onChange={handleChange}
+          />
+        </Box>
+        <Box>
+          <Typography variant="subtitle2" >Password</Typography>
+          <TextField
+            name="password"
+            type="password"
+            fullWidth
+            margin="normal"
+            value={form.password}
+            onChange={handleChange}
+          />
+        </Box>
+        
         <Button
           type="submit"
           fullWidth
           variant="contained"
           color='primary'
-          sx={{ mt: 2 }}
+          sx={{ my: 2 }}
           disabled={loading}
         >
           {loading ? <CircularProgress size={24} color="inherit" /> : 'Register'}
         </Button>
-        <Button sx={{ mt: 2 }} fullWidth variant="outlined" onClick={() => router.push("/auth/login")}>
-            Login
-          </Button>
+                  <Divider>or </Divider>
+
+        <Stack direction="row" justifyContent="center" mt={2}>
+            <Typography variant="body2">
+              Already have an account? {' '}
+              <Button 
+                variant="text" 
+                size="small" 
+                onClick={() => router.push("/auth/login")}
+                sx={{ textTransform: 'none', minWidth: 'auto' }}
+              >
+                Login
+              </Button>
+            </Typography>
+          </Stack>
       </form>
     </Box>
   );

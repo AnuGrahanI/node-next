@@ -60,7 +60,7 @@ export default function Header({ onDrawerToggle }: HeaderProps) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          My App
+          PEA’ZU	
         </Typography>
 
         {/* Theme toggle */}

@@ -8,6 +8,7 @@ export interface AuthContextValue {
   error: string | null;
   isLoading: boolean;
   checkSession?: () => Promise<void>;
+  user ?: any | null
 }   
 
 export const AuthContext = React.createContext<AuthContextValue | undefined>(undefined);
@@ -17,19 +18,20 @@ export interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps): React.JSX.Element {
-  const [state, setState] = React.useState<{ token: string | null;  error: string | null; isLoading: boolean }>({
+  const [state, setState] = React.useState<{ token: string | null;  error: string | null; isLoading: boolean, user ?: any | null }>({
     token: null,
     error: null,
     isLoading: true,
+    user: null
   });
 
   const checkSession = React.useCallback(async (): Promise<void> => {
     try {
-      const { token: data } = await authClient.getToken();
-      setState((prev) => ({ ...prev, token: data ?? null, error: null, isLoading: false }));
+      const { token: data,user } = await authClient.getToken();
+      setState((prev) => ({ ...prev, token: data ?? null, error: null, isLoading: false, user }));
     } catch (err) {
       console.log(err);
-      setState((prev) => ({ ...prev, token: null, error: 'Something went wrong2', isLoading: false }));
+      setState((prev) => ({ ...prev, token: null, error: 'Something went wrong2', isLoading: false, user: null }));
     }
   }, []);
 
