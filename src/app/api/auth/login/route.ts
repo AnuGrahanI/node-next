@@ -1,38 +1,3 @@
-// import { connectDB } from "@/lib/mongodb";
-// import User from "@/models/User";
-// import bcrypt from "bcryptjs";
-// import { NextResponse } from "next/server";
-
-// export async function POST(req: Request) {
-//   try {
-//     await connectDB();
-//     const { email, password } = await req.json();
-
-//     const user = await User.findOne({ email });
-
-//     if (!user) {
-//       return NextResponse.json({ success: false, message: "User not found" }, { status: 404 });
-//     }
-
-//    const isMatch = await bcrypt.compare(password, user.password); // ✅
-//     if (!isMatch) {
-//       return NextResponse.json({ success: false, message: "Invalid credentials" }, { status: 401 });
-//     }
-
-//     return NextResponse.json({
-//       success: true,
-//       message: "Login successful",
-//       data: {
-//         _id: user._id,
-//         name: user.name,
-//         email: user.email,
-//       },
-//     });
-//   } catch (err: any) {
-//     return NextResponse.json({ success: false, message: err.message }, { status: 500 });
-//   }
-// }
-
 import { connectDB } from "@/lib/mongodb";
 import User from "@/models/User";
 import bcrypt from "bcryptjs";
@@ -44,10 +9,23 @@ const SECRET = process.env.NEXTAUTH_SECRET!;
 export async function POST(req: Request) {
   try {
     await connectDB();
+
     const { email, password } = await req.json();
+    if (!email || !password) {
+      return NextResponse.json(
+        { success: false, message: "Email and password are required" },
+        { status: 400 }
+      );
+    }
+
+    if (!SECRET) {
+      return NextResponse.json(
+        { success: false, message: "Server misconfigured" },
+        { status: 500 }
+      );
+    }
 
     const user = await User.findOne({ email });
-
     if (!user) {
       return NextResponse.json(
         { success: false, message: "User not found" },
@@ -82,8 +60,9 @@ export async function POST(req: Request) {
       },
     });
   } catch (err: any) {
+    console.error("Login error:", err);
     return NextResponse.json(
-      { success: false, message: err.message },
+      { success: false, message: "Internal server error" },
       { status: 500 }
     );
   }

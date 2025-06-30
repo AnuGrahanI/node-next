@@ -23,7 +23,11 @@ export const loginUser = createAsyncThunk<
 
 if (!res || res.error) {
   console.error("Login failed:", res?.error); // Should not log after this fix
-  throw new Error(res?.error ?? "Invalid credentials");
+  // throw new Error(res?.error ?? "Invalid credentials");
+   return rejectWithValue("Invalid credentials"); // ✅ get error thrown in authorize()
+
+}else{
+  window.location.reload();
 }
 
     const session = await getSession();
