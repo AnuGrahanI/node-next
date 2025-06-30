@@ -114,9 +114,6 @@ export const authOptions = {
   return session; 
 }
 
-},pages: {
-  signIn: "/auth/register",
-  error: "/auth/error",
-},
+}
 
 } satisfies NextAuthOptions;
