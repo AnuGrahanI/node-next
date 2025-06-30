@@ -23,8 +23,9 @@ export const RequestAction = createAsyncThunk(
   'people/RequestAction',
   async ({ requestorId , action}: RequestAction, { rejectWithValue }) => {
     try {
-      const response = await apiClient.post('/api/people/requests/' + action + '/', { requestorId});
-      return response.message;
+      const response = await apiClient.post(`/api/people/requests/${action}`, {
+        requestorId,
+      });      return response.message;
     } catch (err: any) {
       return rejectWithValue(err.message || 'Something went wrong');
     }

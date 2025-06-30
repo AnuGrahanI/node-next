@@ -49,7 +49,7 @@ const user: any | null = userString ? JSON.parse(userString) : null;
 
         // Fetch messages
         const messagesRes = await apiClient.get(`/api/chat/messages/${id}`);
-        const messagesData: any = await messagesRes;
+        const messagesData: any =  messagesRes;
         if (messagesData.success) {
           const transformedMessages = messagesData?.messages.map((msg: any) => ({
             ...msg,

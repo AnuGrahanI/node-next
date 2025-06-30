@@ -3,7 +3,12 @@ import User from '@/models/User';
 import { NextRequest, NextResponse } from 'next/server';
 import { authenticateRequest } from '@/lib/utils/auth';
 
-export async function POST(req: NextRequest, { params }: { params: { action: string } }) {
+
+export async function POST(
+  req: NextRequest,
+  { params }: { params: Promise<{ action: string }> }
+) {
+  const { action } = await params
   try {
     await connectDB();
     
@@ -43,7 +48,7 @@ export async function POST(req: NextRequest, { params }: { params: { action: str
       );
     }
 
-    if (params.action === 'accept') {
+    if (action === 'accept') {
       // Add each other as friends
       await Promise.all([
         User.findByIdAndUpdate(userId, {
@@ -70,7 +75,7 @@ export async function POST(req: NextRequest, { params }: { params: { action: str
     return NextResponse.json(
       {
         success: true,
-        message: `Request ${params.action === 'accept' ? 'accepted' : 'rejected'} successfully`
+        message: `Request ${action === 'accept' ? 'accepted' : 'rejected'} successfully`,
       },
       { status: 200 }
     );
@@ -78,7 +83,7 @@ export async function POST(req: NextRequest, { params }: { params: { action: str
     return NextResponse.json(
       {
         success: false,
-        message: error.message || `Failed to ${params.action} friend request`
+        message: error.message || `Failed to ${action} friend request`
       },
       { status: 500 }
     );

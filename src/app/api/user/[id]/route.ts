@@ -4,7 +4,11 @@ import User from '@/models/User';
 import { NextRequest, NextResponse } from 'next/server';
 import { authenticateRequest } from '@/lib/utils/auth';
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params
   try {
     await connectDB();
     const auth = authenticateRequest(req);
@@ -18,7 +22,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     
    
 
-    const userId = params.id;
+    const userId = id;
 
     // Find the user by ID and exclude sensitive fields
     const user = await User.findById(userId)
