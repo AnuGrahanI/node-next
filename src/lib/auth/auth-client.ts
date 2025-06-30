@@ -50,14 +50,12 @@ class AuthClient {
 
   async getToken(): Promise<{ error?: string; token?: string | null; isLoading: boolean, user?: any | null }> {
     let token = sessionStorage.getItem("accessToken");
-    let user = sessionStorage.getItem("user");
+    const user = sessionStorage.getItem("user");
     let isLoading = true;
 
     try {
       const res = await axios.get("/api/auth/session");
-      const session = res.data;
-      console.log('session',session);
-      
+      const session = res.data;      
       if (session && !token &&  (session.idToken || session.accessToken)) {
         const result = await this.signUp({ token: session.idToken || session.accessToken, image: session?.user?.image ||session?.user?.picture });
         token = result.token || null;

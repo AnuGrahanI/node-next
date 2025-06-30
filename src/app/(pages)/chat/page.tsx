@@ -30,7 +30,7 @@ const {user }=useAuth()
     const fetchFriends = async () => {
       try {
         const response = await apiClient.get('/api/chat/friends');
-        const data:any = await response;
+        const data:any =  response;
         if (data.success) {
           setFriends(data.data);
         }

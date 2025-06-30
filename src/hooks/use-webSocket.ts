@@ -46,5 +46,5 @@ export function useWebSocket(userId: string) {
     return false;
   };
 
-  return { isConnected, messages, sendMessage };
+  return { isConnected, messages, sendMessage,ws };
 }

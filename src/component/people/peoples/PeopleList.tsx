@@ -3,7 +3,7 @@
 import { Grid, Button } from "@mui/material";
 import UserCard from "../UserCard";
 import { User } from "../UserCard";
-import {  useCallback, useEffect, useState } from "react";
+import {  useCallback, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/stores/hooks";
 import { FetchPeoples, sendRequest } from "@/stores/people/peoples/peoples-thunk";
 

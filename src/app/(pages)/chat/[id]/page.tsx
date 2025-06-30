@@ -77,20 +77,41 @@ const user: any | null = userString ? JSON.parse(userString) : null;
     }
   }, [id, userId]);
 
-  useEffect(() => {
-    if (isConnected && userId && id) {
-      // Listen for typing indicators
-      const handleMessage = (event: MessageEvent) => {
-        const message = JSON.parse(event.data);
-        if (message.type === 'typing' && message.senderId === id) {
-          setIsTyping(message.isTyping);
-        }
-      };
+useEffect(() => {
+  if (isConnected && userId && id) {
+    const handleMessage = (event: MessageEvent) => {
+      const message = JSON.parse(event.data);
+      
+      // Handle incoming chat messages
+      if (message.type === 'chat' && message.senderId === id) {
+        setMessages(prev => [...prev, {
+          _id: message._id || Date.now().toString(),
+          senderId: message.senderId,
+          content: message.content,
+          createdAt: message.createdAt || new Date().toISOString(),
+          from: "other" as const
+        }]);
+      }
+      
+      // Handle typing indicators
+      if (message.type === 'typing' && message.senderId === id) {
+        setIsTyping(message.isTyping);
+      }
+    };
 
-      // Add event listener in the actual WebSocket implementation
-      // This is just for demonstration - in reality, you'd handle this in the useWebSocket hook
+    // Get the WebSocket instance from your hook
+    const ws = (useWebSocket as any).ws; // You'll need to expose this from your hook
+    
+    if (ws) {
+      ws.addEventListener('message', handleMessage);
+      
+      // Cleanup function
+      return () => {
+        ws.removeEventListener('message', handleMessage);
+      };
     }
-  }, [isConnected, id, userId]);
+  }
+}, [isConnected, id, userId]);
 
  
   const handleSend = async (message: string) => {
@@ -109,7 +130,7 @@ const user: any | null = userString ? JSON.parse(userString) : null;
 
   try {
     // Send via WebSocket for real-time
-    const wsSent = sendMessage({
+    sendMessage({
       type: 'chat',
       senderId: userId,
       receiverId: id,
