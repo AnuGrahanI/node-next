@@ -33,7 +33,7 @@ export const authOptions = {
     try {
 
     } catch (err) {
-      throw new Error("Server returned invalid response");
+      throw new Error("Server returned invalid response", { cause: err });
     }
 
     if (!res.ok || !result.success || !result.data?.user) {
