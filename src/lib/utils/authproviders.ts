@@ -19,8 +19,9 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        try {
-        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/login`, {
+        // const res = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/login`, {
+        const res = await fetch(`https://node-next-olive.vercel.app/api/auth/login`, {
+
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -29,17 +30,7 @@ export const authOptions = {
           }),
         });
 
-                   const result = await res.json();
-    try {
-
-    } catch (err) {
-      throw new Error("Server returned invalid response", { cause: err });
-    }
-
-    if (!res.ok || !result.success || !result.data?.user) {
-      throw new Error(result.message || "Invalid credentials");
-    }
-
+        const result = await res.json();
         const user = result?.data?.user;
         const accessToken = result?.data?.accessToken;
         const refreshToken = result?.data?.refreshToken;
@@ -55,12 +46,8 @@ export const authOptions = {
           email: user.email,
           accessToken,
           refreshToken,
-        }
-      }catch (err) {
-        console.error("Login failed:", err);
-        return null;
+        };
       }
-      },
             
     }),
     GithubProvider({
@@ -113,7 +100,6 @@ export const authOptions = {
   }
   return session; 
 }
-
-}
+},
 
 } satisfies NextAuthOptions;
