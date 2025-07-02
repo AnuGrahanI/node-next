@@ -36,10 +36,12 @@ export async function GET(req: NextRequest) {
         success: true,
         message: 'User profile fetched successfully',
         data: {
+          id: user._id,
           name: user.name,
           email: user.email,
           image: user.image || '',
           friendsCount: user.friends?.length || 0,
+
         }
       },
       { status: 200 }
@@ -107,6 +109,8 @@ export async function PUT(req: NextRequest) {
           name: updatedUser?.name,
           email: updatedUser?.email,
           image: updatedUser?.image || '',
+          
+
         }
       },
       { status: 200 }

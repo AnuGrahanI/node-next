@@ -7,6 +7,7 @@ import {
   Avatar,
   Stack,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 export interface User {
   id: number;
@@ -15,6 +16,7 @@ export interface User {
   avatar: string;
   actions: React.ReactNode;
   _id: string;
+  image?: string;
 }
 
 interface UserCardProps {
@@ -23,10 +25,12 @@ interface UserCardProps {
 }
 
 export default function UserCard({ user, actions }: UserCardProps) {
+  const router = useRouter();
   return (
-    <Card elevation={3}>
+    <Card elevation={3} >
       <CardHeader
-        avatar={<Avatar>{user.avatar}</Avatar>}
+        onClick={() => {router.push("/profile/"+user._id)}} sx={{cursor:"pointer"}}
+        avatar={<Avatar>{user.image}</Avatar>}
         title={user.name}
         subheader={user.email}
       />

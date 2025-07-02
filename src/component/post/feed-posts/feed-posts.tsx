@@ -24,10 +24,11 @@ import { fetchFeed, toggleLike } from "@/stores/posts/feeds/feed-thunk";
 import { RootState } from "@/stores/store";
 import { setScope } from "@/stores/posts/feeds/feed-slice";
 import PostSkeleton from "../post-skeleton/PostSkeleton";
+import { useRouter } from "next/navigation";
 
 export interface FeedPostData {
   _id: string;
-  user: { name: string; image: string };
+  user: { name: string; image: string, _id: string };
   createdAt: string;
   text: string;
   images: string[];
@@ -36,8 +37,9 @@ export interface FeedPostData {
 }
 
 function PostCard({ post }: { post: FeedPostData }) {
+  const router = useRouter();
   const dispatch = useAppDispatch();
-  const { user: author, createdAt, text, images } = post;
+  const { user: author, createdAt, text, images, } = post;
   const [activeImg, setActiveImg] = useState(0);
 
   const next = () => setActiveImg((i) => (i < images.length - 1 ? i + 1 : i));
@@ -49,8 +51,8 @@ function PostCard({ post }: { post: FeedPostData }) {
   return (
     <Card sx={{ mb: 2, borderRadius: 3 }}>
       <CardHeader
-        avatar={<Avatar src={author.image} />}
-        title={<Typography fontWeight={600}>{author.name}</Typography>}
+        avatar={<Avatar src={author?.image} />}
+        title={<Typography fontWeight={600} onClick={() => {router.push("/profile/"+author?._id)}}>{author?.name}</Typography>}
         subheader={<Typography variant="caption">{new Date(createdAt).toLocaleString()}</Typography>}
       />
       <CardContent sx={{ pt: 0 }}>

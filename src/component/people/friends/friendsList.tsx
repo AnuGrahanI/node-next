@@ -34,10 +34,11 @@ export default function FriendsList() {
       {peoples.map((user) => (
         <Grid size={{ xs: 12, sm: 6, md: 4 }}  key={user.id}>
           <UserCard
+
             user={user}
             actions={
               <>
-                <Button size="small" variant="contained" color="secondary" onClick={() => router.push("/chat/"+user._id)}>
+                <Button size="small" variant="contained" color="primary" onClick={() => router.push("/chat/"+user._id)}>
                   Message
                 </Button>
                 <Button size="small" variant="outlined" color="warning" onClick={() => handleUnfriend(user._id)}>

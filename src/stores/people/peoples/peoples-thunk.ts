@@ -29,3 +29,17 @@ export const sendRequest = createAsyncThunk(
     }
   }
 );
+export const cancelRequest = createAsyncThunk(
+  'people/cancelrequest',
+  async (recipientId: SendRequest, { rejectWithValue }) => {
+    try {
+      const response = await apiClient.delete('/api/people/peoples/cancel-request', {
+        data: recipientId,
+      });
+      return response.message;
+    } catch (err: any) {
+      return rejectWithValue(err.message || 'Something went wrong');
+    }
+  }
+);
+

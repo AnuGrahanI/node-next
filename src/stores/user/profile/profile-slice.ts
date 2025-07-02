@@ -13,6 +13,8 @@ const initialState: UserState = {
     name: '',
     email: '',
     friendsCount: 0,
+    id: '',
+    
 
   },
   loading: false,

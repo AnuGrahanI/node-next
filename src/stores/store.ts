@@ -7,6 +7,7 @@ import peoplesReducer from './people/peoples/peoples-slice';
 import requestReducer from './people/requests/requests-slice';
 import friendsReducer from './people/friends/friends-slice';
 import feedsReducer from './posts/feeds/feed-slice';
+import usersReducer from './user/profiles/profiles-slice';
 
 import snackbarMiddleware from './snackbar.middleware';
 export const makeStore = () => {
@@ -15,6 +16,7 @@ export const makeStore = () => {
       snackbar: snackbarReducer,
       register:registerReducer,
       user: userReducer,
+      users: usersReducer,
       forgotpassword:forgotpasswordReducer,
       peoples: peoplesReducer,
       requests: requestReducer,

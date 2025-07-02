@@ -2,14 +2,16 @@ import { useAppDispatch, useAppSelector } from '@/stores/hooks';
 import { RootState } from '@/stores/store';
 import { fetchUser } from '@/stores/user/profile/profile-thunk';
 import { Box, Avatar, Typography, Skeleton, Paper } from '@mui/material';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 const ProfileSidebar = () => {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.user);
-  const { name, email, image: globalImage, friendsCount } = useAppSelector((state) => state.user.data);
+  const { name, email, image: globalImage, friendsCount,id } = useAppSelector((state) => state.user.data);
   const [imagePreview, setImagePreview] = useState('');
    const posts = useAppSelector((state: RootState) => state.feeds.posts.length);
+   const router= useRouter();
 
   useEffect(() => {
     if (globalImage) {
@@ -69,12 +71,14 @@ const ProfileSidebar = () => {
         />
       ) : (
         <Typography 
+        onClick={() => {router.push("/profile/"+id)}}
           variant="h6" 
           sx={{ 
             fontWeight: 700,
             mb: 0.5,
             color: 'text.primary',
-            fontSize: '1.25rem'
+            fontSize: '1.25rem',
+            cursor: 'pointer'
           }}
         >
           {name}
