@@ -18,6 +18,7 @@ import { deepPurple } from "@mui/material/colors";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 import { authClient } from "@/lib/auth/auth-client";
 import MenuIcon from '@mui/icons-material/Menu';
+import { useRouter } from "next/navigation";
 
 interface HeaderProps {
   onDrawerToggle: () => void;
@@ -26,6 +27,7 @@ interface HeaderProps {
 export default function Header({ onDrawerToggle }: HeaderProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { mode, setMode } = useColorScheme();
+  const router = useRouter();
   
 
 
@@ -38,7 +40,7 @@ export default function Header({ onDrawerToggle }: HeaderProps) {
   };
 
   const handleProfile = () => {
-    console.log("Navigate to profile");
+    router.push("/profile/update");
     handleMenuClose();
   };
   const handleLogout = () => {
@@ -48,7 +50,11 @@ export default function Header({ onDrawerToggle }: HeaderProps) {
   };
 
   return (
-    <AppBar position="static" color="primary">
+    <AppBar position="static" color="primary" sx={{
+      position:'sticky !important',
+      top:0,
+      zIndex:1000
+    }}>
       <Toolbar>
         <IconButton
           color="inherit"
@@ -60,7 +66,7 @@ export default function Header({ onDrawerToggle }: HeaderProps) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          PEA’ZU	
+          PE’ZU	
         </Typography>
 
         {/* Theme toggle */}

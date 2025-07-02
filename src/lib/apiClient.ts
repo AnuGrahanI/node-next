@@ -62,7 +62,7 @@ const apiClient = {
 
   post: async <T, U>(
     url: string,
-    data: U,
+    data?: U,
     config?: AxiosRequestConfig
   ): Promise<ApiResponse<T>> => {
     const response: AxiosResponse<ApiResponse<T>> = await api.post(url, data, config);
@@ -85,6 +85,7 @@ const apiClient = {
     const response: AxiosResponse<ApiResponse<T>> = await api.delete(url, config);
     return response.data;
   },
+  
 };
 
 export default apiClient;

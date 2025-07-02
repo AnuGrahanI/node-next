@@ -6,9 +6,11 @@ import { useAppDispatch, useAppSelector } from "@/stores/hooks";
 import { RootState } from "@/stores/store";
 import { useCallback, useEffect } from "react";
 import { FetchFriends, UnfriendAction } from "@/stores/people/friends/friends-thunk";
+import { useRouter } from "next/navigation";
 
 
 export default function FriendsList() {
+    const router = useRouter();
     const peoples = useAppSelector((state: RootState) => state.friends.peoples);
     const dispatch = useAppDispatch();
         
@@ -35,7 +37,7 @@ export default function FriendsList() {
             user={user}
             actions={
               <>
-                <Button size="small" variant="contained" color="secondary">
+                <Button size="small" variant="contained" color="secondary" onClick={() => router.push("/chat/"+user._id)}>
                   Message
                 </Button>
                 <Button size="small" variant="outlined" color="warning" onClick={() => handleUnfriend(user._id)}>

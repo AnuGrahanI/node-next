@@ -9,6 +9,7 @@ export interface IUser extends Document {
   requests?: IUser[];
   sentFriendRequests?: IUser[];
   receivedFriendRequests?: IUser[]
+  posts?: mongoose.Types.ObjectId[]
 }
 
 
@@ -21,8 +22,10 @@ const UserSchema: Schema<IUser> = new Schema(
     friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     requests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     sentFriendRequests: { type: [Schema.Types.ObjectId], ref: 'User', default: [] },
+    receivedFriendRequests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    posts: [{ type: Schema.Types.ObjectId, ref: "Post", default: [] }],
 
-    receivedFriendRequests: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+
   },
   { timestamps: true }
 );

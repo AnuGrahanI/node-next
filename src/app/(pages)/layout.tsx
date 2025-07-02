@@ -4,7 +4,7 @@ import { ReactNode, useState } from "react";
 import { AuthGuard } from '@/component/auth/guards/auth-guard';
 import { Box, Drawer } from '@mui/material';
 import Header from "@/component/layout/header/header";
-import Sidebar from "@/component/layout/sidebar/sidebar"; // import here
+import Sidebar from "@/component/layout/sidebar/sidebar";
 
 const drawerWidth = 240;
 

@@ -12,7 +12,7 @@ const initialState: UserState = {
     image:'',
     name: '',
     email: '',
-    password: '',
+    friendsCount: 0,
 
   },
   loading: false,

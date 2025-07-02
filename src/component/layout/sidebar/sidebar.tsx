@@ -2,7 +2,8 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { Box, List, ListItemButton, ListItemText, Toolbar } from '@mui/material';
+import { Box, List, ListItemButton, ListItemText} from '@mui/material';
+import ProfileSidebar from '../profile/profile';
 
 const drawerWidth = 240;
 
@@ -19,15 +20,15 @@ export default function Sidebar({ onItemClick }: { onItemClick?: () => void }) {
 
   return (
     <Box sx={{ width: drawerWidth }} onClick={onItemClick}>
-      <Toolbar />
-      <List>
+      <ProfileSidebar />
+      <List sx={{mt:4}}>
         {navItems.map(({ text, href }) => {
           const isActive = pathname.startsWith(href);
 
           return (
-            <Link key={href} href={href} passHref legacyBehavior>
+            <Link key={href} href={href} passHref>
               <ListItemButton
-                component="a"
+                // component="a"
                 // selected={isActive}
                 sx={{
                   bgcolor: isActive ? 'primary.dark' : undefined,

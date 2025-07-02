@@ -38,7 +38,8 @@ export async function GET(req: NextRequest) {
         data: {
           name: user.name,
           email: user.email,
-          image: user.image || ''
+          image: user.image || '',
+          friendsCount: user.friends?.length || 0,
         }
       },
       { status: 200 }

@@ -50,7 +50,7 @@ export default function LoginPage() {
     <>
       <Box sx={{ textAlign:'center',mb:1}}>
               <Typography variant="h4"  color="primary">
-                PEA`ZA
+                PE`ZA
               </Typography>
             </Box>
       <Typography variant="h5" fontWeight={600} gutterBottom>

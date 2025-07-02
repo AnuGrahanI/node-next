@@ -30,9 +30,16 @@ export default function RegisterForm() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    dispatch(registerUser(form));
-  };
+  e.preventDefault();
+
+  const resultAction = await dispatch(registerUser(form));
+
+  if (registerUser.fulfilled.match(resultAction)) {
+    router.push('/auth/login');
+  } else {
+    return;
+  }
+};
 
   useEffect(() => {
     return () => {
@@ -44,7 +51,7 @@ export default function RegisterForm() {
     <Box mx="auto" >
       <Box sx={{ textAlign:'center',mb:1}}>
         <Typography variant="h4"  color="primary">
-          PEA`ZA
+          PE`ZU
         </Typography>
       </Box>
       <Typography variant="h5" mb={2}>

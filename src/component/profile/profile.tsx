@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState, useRef } from 'react';
-import { Box, TextField, Button, Avatar, Typography, CircularProgress } from '@mui/material';
+import { Box, TextField, Button, Avatar, CircularProgress } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/stores/hooks';
 import { fetchUser, updateUser } from '@/stores/user/profile/profile-thunk';
 import Image from 'next/image';
@@ -89,7 +89,6 @@ export default function ProfilePage() {
 
   return (
     <Box sx={{ maxWidth: 400, mx: 'auto', mt: 4 }}>
-      <Typography variant="h5" gutterBottom>My Profile</Typography>
       <Box sx={{ position: 'relative', width: { xs: 80, sm: 100 }, mx: 'auto','&:hover .upload-text': {
           opacity: 1,
         }, }}>
@@ -141,11 +140,7 @@ export default function ProfilePage() {
     style={{ display: 'none' }}
     onChange={handleImageChange}
   />
-  {/* {editMode && (
-    <Box className="upload-text" sx={uploadTextStyle}>
-      Upload
-    </Box>
-  )} */}
+
   <input
     type="file"
     accept="image/*"
@@ -156,8 +151,8 @@ export default function ProfilePage() {
 </Box>
 
       <input type="file" accept="image/*" ref={fileInputRef} style={{ display: 'none' }} onChange={handleImageChange} />
-      <TextField fullWidth label="Name" value={names} onChange={e => setName(e.target.value)} margin="normal" disabled={!editMode} />
-      <TextField fullWidth label="Email" value={emails} onChange={e => setEmail(e.target.value)} margin="normal" disabled={!editMode} />
+      <TextField fullWidth label="Name" value={names} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} margin="normal" disabled={!editMode} />
+      <TextField fullWidth label="Email" value={emails} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} margin="normal" disabled={!editMode} />
       <Button fullWidth variant="contained" color={editMode ? 'primary' : 'secondary'} onClick={handleSubmit} disabled={loading} sx={{ mt: 2 }}>
         {loading ? <CircularProgress size={24} /> : editMode ? 'Save Changes' : 'Edit Profile'}
       </Button>
