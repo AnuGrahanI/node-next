@@ -14,6 +14,7 @@ const initialState: UserState = {
     email: '',
     friendsCount: 0,
     id: '',
+    cover: '',
     
 
   },

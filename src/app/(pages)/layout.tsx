@@ -48,9 +48,6 @@ export default function MainLayout({ children }: { children: ReactNode }) {
               </Box>
             </Box>
           </Box>
-
-          {/* Main content */}
-         
     </AuthGuard>
   );
 }

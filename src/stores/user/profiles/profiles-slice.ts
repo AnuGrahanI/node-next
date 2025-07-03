@@ -6,11 +6,11 @@ interface UserProfileData {
   id: string;
   name: string;
   image: string;
-  cover: string;
   bio?: string;
   posts: any[];
   friends: string[];
   isMe: boolean;
+  coverimage?: string;
   relationshipStatus: "follow" | "sentRequest" | "acceptRequest" | "following";
 }
 
@@ -27,7 +27,7 @@ const initialState: UserProfileState = {
     id: "",
     name: "",
     image: "",
-    cover: "",
+    coverimage: "",
     bio: "",
     posts: [],
     friends: [],

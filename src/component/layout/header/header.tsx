@@ -14,15 +14,17 @@ import {
   Tooltip,
   useColorScheme,
 } from "@mui/material";
-import { deepPurple } from "@mui/material/colors";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 import { authClient } from "@/lib/auth/auth-client";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/stores/hooks";
 
 
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const { image: globalImage, } = useAppSelector((state) => state.user.data);
+  
   const { mode, setMode } = useColorScheme();
   const router = useRouter();
   
@@ -54,8 +56,10 @@ export default function Header() {
     }}>
       <Toolbar>
         
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          PE’ZU	
+        <Typography  variant="h6" sx={{ flexGrow: 1 }}>
+          <span onClick={() => router.push("/home")} style={{ cursor:'pointer' }}>
+             PE’ZU	
+          </span>
         </Typography>
 
         {/* Theme toggle */}
@@ -68,7 +72,7 @@ export default function Header() {
         {/* Profile menu */}
         <Box ml={2}>
           <IconButton onClick={handleMenuOpen} sx={{ p: 0 }}>
-            <Avatar sx={{ bgcolor: deepPurple[500] }}>A</Avatar>
+            <Avatar  src={globalImage} sx={{ width: 32, height: 32 }}/>
           </IconButton>
           <Menu
             anchorEl={anchorEl}

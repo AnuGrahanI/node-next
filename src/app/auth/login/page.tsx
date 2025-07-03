@@ -50,7 +50,7 @@ export default function LoginPage() {
     <>
       <Box sx={{ textAlign:'center',mb:1}}>
               <Typography variant="h4"  color="primary">
-                PE`ZA
+                PE`ZU
               </Typography>
             </Box>
       <Typography variant="h5" fontWeight={600} gutterBottom>
@@ -108,7 +108,6 @@ export default function LoginPage() {
           
           {/* <SignInButtonWithProvider provider="microsoft" /> */}
           <SignInButtonWithProvider provider="google" />
-          <SignInButtonWithProvider provider="github" />
 
           <Divider>or </Divider>
           <Stack direction="row" justifyContent="center" mt={2}>

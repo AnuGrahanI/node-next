@@ -16,10 +16,10 @@ const snackbarMiddleware = (storeAPI: any) => (next: any) => (action: any) => {
     }));
   
   }if (isFulfilled(action)) {
-    const successMessages = action?.payload;
+    const successMessages = action?.payload?.message;
    
     if(successMessages != undefined && typeof successMessages == "string" && successMessages.trim() !== "") {
-        storeAPI.dispatch(showSnackbar({ message: action.payload || action.payload.statusMessage, severity: "success" }));
+        storeAPI.dispatch(showSnackbar({ message: action.payload.message || action.payload.statusMessage, severity: "success" }));
     }
   }
   return next(action);

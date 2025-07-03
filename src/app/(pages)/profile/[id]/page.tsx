@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { Paper } from "@mui/material";
+import { Paper, Skeleton } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/stores/hooks";
 import { RootState } from "@/stores/store";
@@ -14,13 +14,6 @@ import { fetchUserProfile } from "@/stores/user/profiles/profiles-thunk";
 import { cancelRequest, sendRequest } from "@/stores/people/peoples/peoples-thunk";
 import { UnfriendAction } from "@/stores/people/friends/friends-thunk";
 import { RequestAction } from "@/stores/people/requests/requests.thunk";
-
-// Mock data for demo
-const userProfile = {
-  bio: "Co-founder at Startup Inc.",
-  location: "San Francisco",
-  cover: "https://picsum.photos/200/150",
-};
 
 
 
@@ -31,7 +24,7 @@ export default function Page() {
   const params = useParams();
   const id = params.id as string;
 
-  const { data: user } = useAppSelector(
+  const { data: user , loading } = useAppSelector(
     (state: RootState) => state.users
   );
 
@@ -128,7 +121,7 @@ const handleFollow =async (recipientId: string) => {
         sx={{
           position: "relative",
           height: 100,
-          backgroundImage: `url(${userProfile.cover})`,
+          backgroundImage: `url(${user?.coverimage})`,
           backgroundSize: "cover",
           borderRadius: 2,
           mb: 3,
@@ -158,10 +151,16 @@ const handleFollow =async (recipientId: string) => {
           textAlign: { xs: "center", sm: "left" },
         }}
       >
-        <Typography variant="h5" fontWeight={600}>
-          {user?.name}
-        </Typography>
-        <Typography color="text.secondary">{userProfile?.bio}</Typography>
+        {loading ?
+            <Box sx={{ display: "flex", justifyContent: "center"}}>
+                <Skeleton  width={100} height={30} />
+            </Box>:
+            <Typography variant="h5" fontWeight={600}>
+                {user?.name}
+            </Typography>
+        }
+        
+        <Typography color="text.secondary">{user?.bio}</Typography>
 
         <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
           {isMyProfile ? (

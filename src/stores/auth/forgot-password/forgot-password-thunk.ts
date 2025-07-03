@@ -9,9 +9,9 @@ export const sendOtp = createAsyncThunk(
   async (email: string, { rejectWithValue }) => {
     try {
       const response = await api.post("/api/auth/forgot-password/send-otp", { email });
-      return response.message;
+      return response;
     } catch (err: any) {
-      return rejectWithValue(err.message || 'Something went wrong');
+      return rejectWithValue(err.error || 'Something went wrong');
     }
   }
 );
@@ -20,7 +20,7 @@ export const verifyOtp = createAsyncThunk(
   async ({ email, otp }: { email: string, otp: string }, { rejectWithValue }) => {
     try {
       const response = await api.post("/api/auth/forgot-password/verify", { email, otp });
-      return response.message;
+      return response;
     } catch (err: any) {
       return rejectWithValue(err.message || 'Something went wrong');
     }
@@ -32,7 +32,7 @@ export const resetPassword = createAsyncThunk(
   async ({ email, password }: { email: string, password: string }, { rejectWithValue }) => {
     try {
       const response = await api.post("/api/auth/forgot-password/reset", { email, password });
-      return response.message;
+      return response;
     } catch (err: any) {
       return rejectWithValue(err.message || 'Something went wrong');
     }

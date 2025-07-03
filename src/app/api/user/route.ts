@@ -1,5 +1,5 @@
 import { connectDB } from '@/lib/mongodb';
-import User from '@/models/User';
+import User, { IUser } from '@/models/User';
 import { NextRequest, NextResponse } from 'next/server';
 import { authenticateRequest } from '@/lib/utils/auth';
 import cloudinary from '@/lib/cloudinary';
@@ -41,6 +41,8 @@ export async function GET(req: NextRequest) {
           email: user.email,
           image: user.image || '',
           friendsCount: user.friends?.length || 0,
+          coverimage: user.coverimage || '',
+          bio: user.bio || '',
 
         }
       },
@@ -79,9 +81,20 @@ export async function PUT(req: NextRequest) {
     const formData = await req.formData();
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;
+    const bio = formData.get('bio') as string;
     const imageFile = formData.get('image') as File | null;
-    const updateData: any = { name , email};
-    
+    const coverFile = formData.get('cover') as File | null;
+    const updateData: Partial<IUser> = { name , email, bio };
+        // Handle image upload
+    if (coverFile) {
+      const bytes = await coverFile.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+        const base64Image = `data:${coverFile.type};base64,${buffer.toString("base64")}`;
+        const uploadResponse = await cloudinary.uploader.upload(base64Image, {
+            folder: 'profile_pictures', 
+        });
+        updateData.coverimage = uploadResponse.secure_url; 
+    }
 
 
     // Handle image upload
@@ -94,6 +107,7 @@ export async function PUT(req: NextRequest) {
         });
         updateData.image = uploadResponse.secure_url; 
     }
+    
 
     const updatedUser = await User.findByIdAndUpdate(
       userId,
@@ -109,8 +123,8 @@ export async function PUT(req: NextRequest) {
           name: updatedUser?.name,
           email: updatedUser?.email,
           image: updatedUser?.image || '',
-          
-
+          coverimage: updatedUser?.coverimage || '',
+          bio: updatedUser?.bio
         }
       },
       { status: 200 }
