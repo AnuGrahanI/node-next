@@ -17,14 +17,11 @@ import {
 import { deepPurple } from "@mui/material/colors";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 import { authClient } from "@/lib/auth/auth-client";
-import MenuIcon from '@mui/icons-material/Menu';
 import { useRouter } from "next/navigation";
 
-interface HeaderProps {
-  onDrawerToggle: () => void;
-}
 
-export default function Header({ onDrawerToggle }: HeaderProps) {
+
+export default function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { mode, setMode } = useColorScheme();
   const router = useRouter();
@@ -56,15 +53,7 @@ export default function Header({ onDrawerToggle }: HeaderProps) {
       zIndex:1000
     }}>
       <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={onDrawerToggle}
-          sx={{ mr: 2, display: { sm: 'none' } }}
-        >
-          <MenuIcon />
-        </IconButton>
+        
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
           PE’ZU	
         </Typography>

@@ -52,7 +52,7 @@ function PostCard({ post }: { post: FeedPostData }) {
     <Card sx={{ mb: 2, borderRadius: 3 }}>
       <CardHeader
         avatar={<Avatar src={author?.image} />}
-        title={<Typography fontWeight={600} onClick={() => {router.push("/profile/"+author?._id)}}>{author?.name}</Typography>}
+        title={<Typography sx={{ cursor: "pointer"}} fontWeight={600} onClick={() => {router.push("/profile/"+author?._id)}}>{author?.name}</Typography>}
         subheader={<Typography variant="caption">{new Date(createdAt).toLocaleString()}</Typography>}
       />
       <CardContent sx={{ pt: 0 }}>
