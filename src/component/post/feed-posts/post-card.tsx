@@ -180,7 +180,7 @@ export function PostCard({ post }: { post: FeedPostData }) {
             <IconButton size="small" onClick={toggleComments}>
               <ChatBubbleOutlineIcon fontSize="small" />
             </IconButton>
-            <Typography variant="caption">{comments.length}</Typography>
+            {/* <Typography variant="caption">{comments.length}</Typography> */}
           </Box>
           
           <IconButton size="small">
