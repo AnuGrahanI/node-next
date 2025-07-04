@@ -35,6 +35,7 @@ export interface FeedPostData {
   liked: boolean;
   likesCount: number;
   comments: Comment[];
+  length: number;
 }
 
 export default function Feed() {

@@ -214,7 +214,8 @@ export function PostCard({ post }: { post: FeedPostData }) {
               }}
             >
               <Typography variant="caption" color="text.secondary">
-                View {comments.length} comments
+                {/* View {comments?.length} comments */}
+                View comments
               </Typography>
             </AccordionSummary>
             
