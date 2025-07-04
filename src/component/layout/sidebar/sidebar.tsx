@@ -11,7 +11,7 @@ const navItems = [
   { text: 'Home', href: '/home' },
   { text: 'people', href: '/peoples' },
   { text: 'chat', href: '/chat' },
-  { text: 'profile', href: '/profile' },
+  { text: 'profile', href: '/profile/update' },
 
 ];
 
