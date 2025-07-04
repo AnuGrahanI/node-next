@@ -39,7 +39,6 @@ export default function MainLayout({ children }: { children: ReactNode }) {
               <Header  />
               <Box
                 component="main"
-                sx={{p: 1}}
               >
               {children}
               </Box>

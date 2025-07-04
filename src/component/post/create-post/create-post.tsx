@@ -6,7 +6,6 @@ import {
   Button,
   IconButton,
   InputBase,
-  Paper,
   Stack,
   Typography,
 } from "@mui/material";
@@ -79,13 +78,13 @@ export default function PostCreate() {
   };
 
   return (
-    <Paper
-      elevation={1}
+    <Box
       sx={{
         p: 2,
-        borderRadius: 3,
-        mb: 1,
         mx: "auto",
+        borderBottom: "1px solid",
+        borderColor: "divider",
+        backgroundColor: "background.paper",
       }}
     >
       <Stack direction="row" spacing={2}>
@@ -249,6 +248,6 @@ export default function PostCreate() {
           />
         </Box>
       </Stack>
-    </Paper>
+    </Box>
   );
 }

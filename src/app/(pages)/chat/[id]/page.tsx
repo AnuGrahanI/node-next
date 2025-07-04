@@ -188,13 +188,13 @@ useEffect(() => {
   }
 
   return (
-    <Box display="flex" flexDirection="column" height="100vh">
+    <Box display="flex" flexDirection="column" sx={{ height:{xs:"80vh",sm:"90vh"}}}>
       {/* Header */}
       <Box
         display="flex"
         alignItems="center"
-        px={2}
-        py={1}
+        px={1}
+        py={.5}
         borderBottom="1px solid #ccc"
         bgcolor="background.paper"
       >

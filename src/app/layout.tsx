@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="data" suppressHydrationWarning>
-      <body>
+      <body style={{ overflowX: "hidden" ,height:"100%",display:"flex",flexDirection:"column"}}>
          <InitColorSchemeScript attribute="class" />
         <Providers>{children}</Providers>
       </body>

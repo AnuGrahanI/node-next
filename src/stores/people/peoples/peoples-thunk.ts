@@ -23,7 +23,7 @@ export const sendRequest = createAsyncThunk(
   async (recipientId: SendRequest, { rejectWithValue }) => {
     try {
       const response = await apiClient.post('/api/people/peoples/send-request', recipientId);
-      return response.message;
+      return response;
     } catch (err: any) {
       return rejectWithValue(err.message || 'Something went wrong');
     }
@@ -36,7 +36,7 @@ export const cancelRequest = createAsyncThunk(
       const response = await apiClient.delete('/api/people/peoples/cancel-request', {
         data: recipientId,
       });
-      return response.message;
+      return response;
     } catch (err: any) {
       return rejectWithValue(err.message || 'Something went wrong');
     }

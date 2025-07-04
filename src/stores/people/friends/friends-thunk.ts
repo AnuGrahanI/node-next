@@ -22,7 +22,7 @@ export const UnfriendAction = createAsyncThunk(
   async ({ friendId }: UnfriendAction, { rejectWithValue }) => {
     try {
       const response = await apiClient.post('/api/people/friends/unfriend', { friendId});
-      return response.message;
+      return response;
     } catch (err: any) {
       return rejectWithValue(err.message || 'Something went wrong');
     }

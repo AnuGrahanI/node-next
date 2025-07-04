@@ -34,7 +34,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message: 'User profile fetched successfully',
         data: {
           id: user._id,
           name: user.name,
