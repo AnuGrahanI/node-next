@@ -9,7 +9,6 @@ import {
   IconButton,
   Typography,
   Stack,
-  Drawer,
   Accordion,
   AccordionSummary,
   AccordionDetails,
@@ -21,6 +20,7 @@ import {
   Divider,
   useMediaQuery,
   Theme,
+  SwipeableDrawer,
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -180,7 +180,7 @@ export function PostCard({ post }: { post: FeedPostData }) {
             <IconButton size="small" onClick={toggleComments}>
               <ChatBubbleOutlineIcon fontSize="small" />
             </IconButton>
-            {/* <Typography variant="caption">{comments.length}</Typography> */}
+            <Typography variant="caption">{comments.length}</Typography>
           </Box>
           
           <IconButton size="small">
@@ -214,8 +214,7 @@ export function PostCard({ post }: { post: FeedPostData }) {
               }}
             >
               <Typography variant="caption" color="text.secondary">
-                {/* View {comments?.length} comments */}
-                View comments
+                View {comments.length} comments
               </Typography>
             </AccordionSummary>
             
@@ -277,10 +276,14 @@ export function PostCard({ post }: { post: FeedPostData }) {
       </CardContent>
 
       {/* Comments Drawer for mobile */}
-      <Drawer
+      <SwipeableDrawer
         anchor="bottom"
         open={isMobile && commentsOpen}
         onClose={toggleComments}
+        onOpen={toggleComments}
+        disableSwipeToOpen={false}
+        // open={isMobile && commentsOpen}
+        // onClose={toggleComments}
         sx={{
           '& .MuiDrawer-paper': {
             // height: '70vh',
@@ -348,7 +351,7 @@ export function PostCard({ post }: { post: FeedPostData }) {
             </IconButton>
           </Box>
         </Box>
-      </Drawer>
+      </SwipeableDrawer>
     </Card>
   );
 }
