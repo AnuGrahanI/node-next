@@ -164,14 +164,14 @@ export async function POST(req: NextRequest) {
       const hashed = await bcrypt.hash(tempPassword, 10);
 
       user = await User.create({
+        fname: decoded.given_name,
+        lname: decoded.family_name,
         email,
         name,
         username: email.split("@")[0], 
         image: picture,
         password: hashed,
         emailVerified: true,
-        fname:token.given_name,
-        lname:token.family_name,
         bio:"hi there, i am a pezu user",
       });
 
