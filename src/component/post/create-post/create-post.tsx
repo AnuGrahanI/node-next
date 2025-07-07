@@ -13,17 +13,27 @@ import ImageIcon from "@mui/icons-material/Image";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { useRef, useState } from "react";
+import { useRef, useState,useImperativeHandle,forwardRef, } from "react";
 import { useAppDispatch, useAppSelector } from "@/stores/hooks";
 import { createPost } from "@/stores/posts/create/create-post";
+export interface PostCreateHandle {
+  focusInput: () => void;
+}
+const PostCreate = forwardRef<PostCreateHandle>((_, ref) => {
+    const inputRef = useRef<HTMLInputElement>(null);
 
-export default function PostCreate() {
+  useImperativeHandle(ref, () => ({
+    focusInput() {
+      inputRef.current?.focus();
+    },
+  }));
+  
   const fileRef = useRef<HTMLInputElement>(null);
   const [text, setText] = useState("");
   const [images, setImages] = useState<string[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [fileObjs, setFileObjs] = useState<File[]>([]);
-    const { image } = useAppSelector((state) => state.user.data);
+    const { image, fname } = useAppSelector((state) => state.user.data);
   
 
   const maxImages = 2;
@@ -89,11 +99,13 @@ export default function PostCreate() {
     >
       <Stack direction="row" spacing={2}>
         <Avatar src={image} />
-        <Box sx={{ flex: 1 }}>
+        <Box sx={{ flex: 1 }} id="post-create-anchor">
           <InputBase
-            placeholder="What's on your mind?"
+            placeholder={`What's on your mind ${fname?fname :" "}?`}
             multiline
             fullWidth
+            inputRef={inputRef}
+
             value={text}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
             sx={{
@@ -250,4 +262,7 @@ export default function PostCreate() {
       </Stack>
     </Box>
   );
-}
+});
+PostCreate.displayName = "PostCreate";
+export default PostCreate;
+

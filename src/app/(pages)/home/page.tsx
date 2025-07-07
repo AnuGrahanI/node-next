@@ -1,24 +1,38 @@
-import PostCreate from '@/component/post/create-post/create-post'
-import FeedPost from '@/component/post/feed-posts/feed-posts'
-import { Box, Grid } from '@mui/material';
-import React from 'react'
+// app/(pages)/home/page.tsx
+"use client";
 
-const page = () => {
+import React, { useRef } from "react";
+import { Grid } from "@mui/material";
+import ScrollTopFab from "@/component/layout/scroll-top-fab/scrollTopFab";
+import PostCreate, {
+  PostCreateHandle,
+} from "@/component/post/create-post/create-post";
+import FeedPost from "@/component/post/feed-posts/feed-posts";
+
+const HomePage = () => {
+  const postCreateRef = useRef<PostCreateHandle>(null);
+
+  const openComposer = () => {
+    document
+      .getElementById("post-create-anchor")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    setTimeout(() => postCreateRef.current?.focusInput(), 400);
+  };
+
   return (
     <>
-    <Grid container spacing={2}>
-      <Grid size={{ xs: 12, sm: 12, md: 8}} >
-         <PostCreate/>
-          <FeedPost  />
+      <Grid container spacing={2}>
+        <Grid size={{ xs: 12, md: 4 }}>
+          <PostCreate ref={postCreateRef} />
+          <FeedPost />
         </Grid>
-      <Grid size={{ xs: 0, sm: 0, md: 4}}>
-        <Box>ji</Box>
-        </Grid>
+        <Grid size={{ xs: 0, md: 4 }}  />
       </Grid>
-   
-    
-    </>
-  )
-}
 
-export default page
+      <ScrollTopFab onActivate={openComposer} />
+    </>
+  );
+};
+
+export default HomePage;

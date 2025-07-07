@@ -30,6 +30,8 @@ export async function GET(req: NextRequest) {
         { status: 404 }
       );
     }
+    console.log(user.fname,'user');
+    
 
     return NextResponse.json(
       {
@@ -42,6 +44,7 @@ export async function GET(req: NextRequest) {
           friendsCount: user.friends?.length || 0,
           coverimage: user.coverimage || '',
           bio: user.bio || '',
+          fname: user.fname || '',
 
         }
       },

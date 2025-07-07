@@ -53,6 +53,9 @@ export async function POST(req: Request) {
       email,
       username: fname + ' ' + lname,
       password: hashedPassword, // 🔐 store hashed password
+      bio: 'Hello, I am using PEZU! 🚀',
+      emailVerified: true,
+
     });
 
     // Send welcome email

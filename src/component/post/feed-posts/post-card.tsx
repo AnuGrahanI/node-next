@@ -91,7 +91,7 @@ export function PostCard({ post }: { post: FeedPostData }) {
       />
       
       <CardContent sx={{ pt: 0 }}>
-        {text && <Typography sx={{ mb: images.length ? 2 : 0 }}>{text}</Typography>}
+        {text && <Typography sx={{ mb: images.length ? 2 : 0 ,whiteSpace: 'pre-line' }}>{text}</Typography>}
         
         {images.length > 0 && (
           <Box sx={{ position: "relative", borderRadius: 2, overflow: "hidden" }}>
@@ -224,7 +224,7 @@ export function PostCard({ post }: { post: FeedPostData }) {
                   <div key={comment._id}>
                     <ListItem alignItems="flex-start">
                       <ListItemAvatar>
-                        <Avatar src={comment.user.image} />
+                        <Avatar src={comment?.user?.image} />
                       </ListItemAvatar>
                       <ListItemText
                         primary={
@@ -234,7 +234,7 @@ export function PostCard({ post }: { post: FeedPostData }) {
                               sx={{ cursor: 'pointer' }}
                               onClick={() => router.push("/profile/" + comment.user._id)}
                             >
-                              {comment.user.name}
+                              {comment.user?.name}
                             </Typography>
                             <Typography variant="caption" color="text.secondary">
                               {new Date(comment.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -242,8 +242,9 @@ export function PostCard({ post }: { post: FeedPostData }) {
                           </Box>
                         }
                         secondary={
-                          <Typography variant="body2">
+                          <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
                             {comment.text}
+                            
                           </Typography>
                         }
                       />
@@ -257,14 +258,21 @@ export function PostCard({ post }: { post: FeedPostData }) {
                 <TextField
                   fullWidth
                   size="small"
+                  multiline
                   placeholder="Add a comment..."
                   value={commentText}
                   onChange={(e) => setCommentText(e.target.value)}
-                  onKeyPress={(e) => {
-                    if (e.key === 'Enter') {
-                      handleAddComment();
+                //   onKeyPress={(e) => {
+                //     if (e.key === 'Enter') {
+                //       handleAddComment();
+                //     }
+                //   }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault(); // Prevent newline
+                    handleAddComment();
                     }
-                  }}
+                }}
                 />
                 <IconButton onClick={handleAddComment} disabled={!commentText.trim()}>
                   <SendIcon />
@@ -305,16 +313,16 @@ export function PostCard({ post }: { post: FeedPostData }) {
               <div key={comment._id}>
                 <ListItem sx={{p:0,pb:1}} alignItems="flex-start">
                   <ListItemAvatar>
-                    <Avatar src={comment.user.image} />
+                    <Avatar src={comment?.user?.image} />
                   </ListItemAvatar>
                   <ListItemText
                     primary={
                       <Box sx={{ display: 'flex', alignItems: 'center',justifyContent:'space-between', gap: 1,mb:1 }}>
                         <Typography 
                           sx={{ cursor: 'pointer',fontSize:'.7rem' }}
-                          onClick={() => router.push("/profile/" + comment.user._id)}
+                          onClick={() => router.push("/profile/" + comment.user?._id)}
                         >
-                          {comment.user.name}
+                          {comment.user?.name}
                         </Typography>
                         <Typography sx={{fontSize:'.65rem'}} variant="caption" color="text.secondary">
                           {new Date(comment.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}

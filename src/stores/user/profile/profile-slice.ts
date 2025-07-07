@@ -15,7 +15,8 @@ const initialState: UserState = {
     friendsCount: 0,
     id: '',
     cover: '',
-    username:''
+    username:'',
+    fname:''
     
 
   },

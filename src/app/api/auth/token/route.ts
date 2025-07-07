@@ -166,10 +166,13 @@ export async function POST(req: NextRequest) {
       user = await User.create({
         email,
         name,
-        username: email.split("@")[0], // simple username
+        username: email.split("@")[0], 
         image: picture,
         password: hashed,
         emailVerified: true,
+        fname:token.given_name,
+        lname:token.family_name,
+        bio:"hi there, i am a pezu user",
       });
 
       /* ---- send welcome e‑mail ---- */
